@@ -4,8 +4,18 @@ Support for OAuth 2 and OpenId Connect (OIDC) in Angular. Already prepared for t
 
 ![OIDC Certified Logo](https://raw.githubusercontent.com/manfredsteyer/angular-oauth2-oidc/master/oidc.png)
 
+## Fork Notice
+
+This repository is a fork of [manfredsteyer/angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc).
+
+Purpose of this fork:
+
+- maintain project-specific adaptations on top of upstream
+- iterate on changes independently while keeping compatibility with the original library
+
 ## Credits
 
+- Original project and main authorship: [Manfred Steyer](https://github.com/manfredsteyer)
 - [jsrsasign](https://kjur.github.io/jsrsasign/) for validating token signature and for hashing
 - [Identity Server](https://github.com/identityserver) for testing with an .NET/.NET Core Backend
 - [Keycloak (Redhat)](http://www.keycloak.org/) for testing with Java
@@ -13,10 +23,10 @@ Support for OAuth 2 and OpenId Connect (OIDC) in Angular. Already prepared for t
 
 ## Resources
 
-- Sources and Sample: [https://github.com/manfredsteyer/angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc)
+- Fork Sources and Sample: [https://github.com/pbechliv/angular-oauth2-oidc](https://github.com/pbechliv/angular-oauth2-oidc)
+- Upstream Sources and Sample: [https://github.com/manfredsteyer/angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc)
 - Source Code Documentation: [https://manfredsteyer.github.io/angular-oauth2-oidc/docs](https://manfredsteyer.github.io/angular-oauth2-oidc/docs)
 - Community-provided sample implementation: [https://github.com/jeroenheijmans/sample-angular-oauth2-oidc-with-auth-guards/](https://github.com/jeroenheijmans/sample-angular-oauth2-oidc-with-auth-guards/)
-
 
 ## Tested Environment
 
@@ -121,10 +131,9 @@ _redirectUris:_
 npm i angular-oauth2-oidc --save
 ```
 
-
 ## Option 1: Standalone APIs
 
-If you use Standalone Components introduced with Angular 14, you can use our standalone API (call to ``provideOAuthClient``) in your ``main.ts`` to setup the ``OAuthClient``:
+If you use Standalone Components introduced with Angular 14, you can use our standalone API (call to `provideOAuthClient`) in your `main.ts` to setup the `OAuthClient`:
 
 ```TypeScript
 // main.ts -- Angular 15+ version
@@ -143,7 +152,7 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-As Angular 14 does have Standalone Components but no Standalone API for its ``HttpClient``, you need to go with the traditional ``HttpClientModule`` in this version:
+As Angular 14 does have Standalone Components but no Standalone API for its `HttpClient`, you need to go with the traditional `HttpClientModule` in this version:
 
 ```TypeScript
 // main.ts -- Angular 14 version
@@ -163,7 +172,7 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-The ``provideOAuthClient`` function takes the same parameters as the forRoot function of the OAuthModule that is still in place for the sake of compatibility with existing code bases.
+The `provideOAuthClient` function takes the same parameters as the forRoot function of the OAuthModule that is still in place for the sake of compatibility with existing code bases.
 
 ## Option 2: Using NgModules
 
@@ -250,7 +259,7 @@ this.oauthService.loadDiscoveryDocumentAndTryLogin();
 
 ### Logging out
 
-The `logOut` method clears the used token store (by default ``sessionStorage``) and forwards the user to the auth servers logout endpoint if one was configured (manually or via the discovery document). It returns a `Promise<void>`.
+The `logOut` method clears the used token store (by default `sessionStorage`) and forwards the user to the auth servers logout endpoint if one was configured (manually or via the discovery document). It returns a `Promise<void>`.
 
 ```typescript
 await this.oauthService.logOut();
@@ -299,7 +308,6 @@ Nowadays, using code flow + PKCE -- as shown above -- is the recommended OAuth 2
 
 See the [documentation](https://manfredsteyer.github.io/angular-oauth2-oidc/docs/) for more information about this library.
 
-
 ## Breaking Change in Version 9
 
 With regards to tree shaking, beginning with version 9, the `JwksValidationHandler` has been moved to a library of its own. If you need it for implementing **implicit flow**, please install it using npm:
@@ -321,8 +329,6 @@ import { JwksValidationHandler } from 'angular-oauth2-oidc';
 ```
 
 Please note, that this dependency is not needed for the **code flow**, which is nowadays the **recommended** flow for single page applications. This also results in smaller bundle sizes.
-
-
 
 ### Breaking change in 9.1.0
 
@@ -381,4 +387,3 @@ Now the reverse is true **if you're upgrading from before 9.0.0**: you need to r
 [<img alt="mabdelaal86" src="https://avatars.githubusercontent.com/u/11019219?v=4&s=117" width="117">](https://github.com/mabdelaal86)[<img alt="nhance" src="https://avatars.githubusercontent.com/u/602226?v=4&s=117" width="117">](https://github.com/nhance)[<img alt="Razzeee" src="https://avatars.githubusercontent.com/u/5943908?v=4&s=117" width="117">](https://github.com/Razzeee)[<img alt="maxisam" src="https://avatars.githubusercontent.com/u/456807?v=4&s=117" width="117">](https://github.com/maxisam)[<img alt="ismcagdas" src="https://avatars.githubusercontent.com/u/4133525?v=4&s=117" width="117">](https://github.com/ismcagdas)
 
 [<img alt="Toxicable" src="https://avatars.githubusercontent.com/u/13490925?v=4&s=117" width="117">](https://github.com/Toxicable)[<img alt="ManuelRauber" src="https://avatars.githubusercontent.com/u/740791?v=4&s=117" width="117">](https://github.com/ManuelRauber)[<img alt="vdveer" src="https://avatars.githubusercontent.com/u/1217814?v=4&s=117" width="117">](https://github.com/vdveer)[<img alt="jeroenheijmans" src="https://avatars.githubusercontent.com/u/1590536?v=4&s=117" width="117">](https://github.com/jeroenheijmans)[<img alt="manfredsteyer" src="https://avatars.githubusercontent.com/u/1573728?v=4&s=117" width="117">](https://github.com/manfredsteyer)
-

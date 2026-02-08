@@ -2,6 +2,15 @@
   "name": "angular-oauth2-oidc",
   "version": "20.0.2",
   "license": "MIT",
+  "description": "Fork workspace for angular-oauth2-oidc with project-specific adaptations",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbechliv/angular-oauth2-oidc-async.git"
+  },
+  "homepage": "https://github.com/pbechliv/angular-oauth2-oidc-async",
+  "bugs": {
+    "url": "https://github.com/pbechliv/angular-oauth2-oidc-async/issues"
+  },
   "scripts": {
     "release": "standard-version",
     "ng": "ng",
