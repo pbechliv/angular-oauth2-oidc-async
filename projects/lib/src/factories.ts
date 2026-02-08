@@ -1,11 +1,11 @@
-import { MemoryStorage } from './types';
+import { MemoryStorage, OAuthStorage, SyncStorageAdapter } from './types';
 
 export function createDefaultLogger() {
   return console;
 }
 
-export function createDefaultStorage() {
+export function createDefaultStorage(): OAuthStorage {
   return typeof sessionStorage !== 'undefined'
-    ? sessionStorage
+    ? new SyncStorageAdapter(sessionStorage)
     : new MemoryStorage();
 }

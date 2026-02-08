@@ -69,8 +69,8 @@ export class HomeComponent {
         this.oauthService.initLoginFlow();
     }
 
-    public logoff() {
-        this.oauthService.logOut();
+    public async logoff() {
+        await this.oauthService.logOut();
     }
 
     public get name() {
@@ -103,4 +103,3 @@ The following snippet contains the template for the login page:
     Username/Passwort zum Testen: max/geheim
 </div>
 ```
-

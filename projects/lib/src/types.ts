@@ -96,16 +96,28 @@ export abstract class OAuthLogger {
  */
 export abstract class OAuthStorage {
   abstract getItem(key: string): string | null;
-  abstract removeItem(key: string): void;
-  abstract setItem(key: string, data: string): void;
+  abstract removeItem(key: string): void | Promise<void>;
+  abstract setItem(key: string, data: string): void | Promise<void>;
+
+  /**
+   * Optional initialization hook for async storage backends.
+   *
+   * Implement this when your storage needs startup hydration
+   * (for example, loading a memory cache from IndexedDB) before
+   * synchronous `getItem` reads are used.
+   *
+   * The OAuthService calls this once before first token-related
+   * operations; synchronous storages can omit it.
+   */
+  init?(): Promise<void>;
 }
 
 @Injectable()
-export class MemoryStorage implements OAuthStorage {
+export class MemoryStorage extends OAuthStorage {
   private data = new Map<string, string>();
 
-  getItem(key: string): string {
-    return this.data.get(key);
+  getItem(key: string): string | null {
+    return this.data.get(key) ?? null;
   }
 
   removeItem(key: string): void {
@@ -114,6 +126,25 @@ export class MemoryStorage implements OAuthStorage {
 
   setItem(key: string, data: string): void {
     this.data.set(key, data);
+  }
+}
+
+@Injectable()
+export class SyncStorageAdapter extends OAuthStorage {
+  constructor(private storage: Storage) {
+    super();
+  }
+
+  getItem(key: string): string | null {
+    return this.storage.getItem(key);
+  }
+
+  removeItem(key: string): void {
+    this.storage.removeItem(key);
+  }
+
+  setItem(key: string, data: string): void {
+    this.storage.setItem(key, data);
   }
 }
 

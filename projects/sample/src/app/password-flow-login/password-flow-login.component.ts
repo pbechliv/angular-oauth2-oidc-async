@@ -64,7 +64,7 @@ export class PasswordFlowLoginComponent implements OnInit {
       });
   }
 
-  logout() {
-    this.oauthService.logOut(true);
+  async logout() {
+    await this.oauthService.logOut(true);
   }
 }

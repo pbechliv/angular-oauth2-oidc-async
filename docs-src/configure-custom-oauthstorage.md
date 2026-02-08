@@ -40,3 +40,12 @@ export class AppModule {
 ## Custom storage solution
 
 If you want to use a custom storage solution, you can extend the `OAuthStorage` class. Documentation can be found [here](../classes/OAuthStorage.html#info). Then add it as a provider, just like in the `localStorage` example above.
+
+`OAuthStorage` supports synchronous reads and synchronous or asynchronous writes:
+
+- `getItem(key): string | null`
+- `setItem(key, value): void | Promise<void>`
+- `removeItem(key): void | Promise<void>`
+- `init?(): Promise<void>` (optional startup hook for async backends)
+
+Implement `init()` when your storage needs to hydrate an in-memory cache before `getItem` is used (for example, loading data from IndexedDB).
